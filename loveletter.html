@@ -1,0 +1,89 @@
+def generate_love_letter_html(image_path, message):
+    html = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        body {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }}
+
+        .envelope-wrapper {{
+            position: relative;
+            cursor: pointer;
+        }}
+
+        .envelope {{
+            width: 200px;
+            height: 150px;
+            background-color: violet;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+            transition: transform 0.5s ease;
+        }}
+
+        .envelope.open {{
+            transform: translateY(100px) rotateX(-180deg);
+        }}
+
+        .message {{
+            position: absolute;
+            top: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: none;
+        }}
+
+        .message img {{
+            width: 100px;
+            margin-bottom: 10px;
+        }}
+
+        .message.show {{
+            display: block;
+        }}
+    </style>
+</head>
+<body>
+
+<div class="envelope-wrapper">
+    <div class="envelope"></div>
+    <div class="message">
+        <img src="{image_path}" alt="Kuroko Sticker">
+        <p>{message}</p>
+    </div>
+</div>
+
+<script>
+    const envelope = document.querySelector('.envelope');
+    const message = document.querySelector('.message');
+
+    document.querySelector('.envelope-wrapper').addEventListener('click', () => {{
+        envelope.classList.add('open');
+        message.classList.add('show');
+    }});
+</script>
+
+</body>
+</html>
+"""
+    return html
+
+# Example usage:
+image_path = "kuroko.png"
+message = "Iloveyouuuuuuuuuuuuuuuuuuuuuusooooooooomuchhhhhhhhhhhhhh darling ko"
+html_content = generate_love_letter_html(image_path, message)
+
+with open("loveletter.html", "w") as f:
+    f.write(html_content)
+
+print("loveletter.html generated successfully!")
+    
